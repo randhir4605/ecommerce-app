@@ -1,0 +1,36 @@
+body{
+    font-family:  Arial, sans-serif;
+}
+
+/* Quantity buttons */
+.quantity-buttons {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 7rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: white;
+}
+
+.quantity-buttons button {
+  width: 2.5rem;
+  height: 2rem;
+  border: none;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.quantity-buttons span {
+  min-width: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.quantity-buttons button:hover {
+  background: #e2e8f0;
+}

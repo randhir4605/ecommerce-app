@@ -132,29 +132,65 @@
 .product-card-title {
   overflow: hidden;
   margin: 0 0 0.5rem;
-  font-size: 1.25rem;
+  font-size: 1rem;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-.product-card-price {
-  color: #000000b0;
-  font-weight: 700;
-}
-
-.product-card-action {
-  width: 50%;
-  margin-top: 0.5rem;
-  padding: 0.375rem 0.75rem;
-  color: #0d6efd;
-  text-align: center;
-  border: 1px solid #0d6efd;
-  border-radius: 0.375rem;
-}
-
 .price-and-action {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-top: 0.5rem;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.product-card-price {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #2563eb;
+  white-space: nowrap;
+}
+
+/* Quantity + Remove */
+.cart-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Common cart button */
+.cart-action {
+  min-width: 7rem;
+  padding: 0.5rem 0.8rem;
+  border: none;
+  border-radius: 0.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Add button */
+.add-action {
+  background: #2563eb;
+  color: white;
+}
+
+.add-action:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+/* Remove button */
+.remove-action {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.remove-action:hover {
+  background: #fecaca;
 }

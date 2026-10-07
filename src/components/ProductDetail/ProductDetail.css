@@ -24,18 +24,7 @@
 }
 
 .product-info h2 {
-    font-size: 28px;
-}
-
-.quantity {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin: 20px 0;
-}
-
-.quantity button {
-    padding: 6px 12px;
+    font-size: 1.5rem;
 }
 
 .cart-button {
@@ -46,6 +35,8 @@
     border: 0;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 10px;
+    max-width: 10rem;
 }
 
 .reviews {

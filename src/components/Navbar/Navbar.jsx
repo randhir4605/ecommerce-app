@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import { useCart } from "../Cart/CartContext";
+import { useCartContext } from "../Cart/CartContext";
 
 export default function Navbar() {
-    const { cartItems } = useCart();
+    const { cartItems } = useCartContext();
     const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
     return (
         <nav className="navbar">

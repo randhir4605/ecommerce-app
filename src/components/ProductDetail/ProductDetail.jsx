@@ -1,13 +1,15 @@
 import "./ProductDetail.css";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-import { useCart } from "../Cart/CartContext";
+import { useCartContext } from "../Cart/CartContext";
 
 const ProductDetail = () => {
   const location = useLocation();
   const product = location.state?.product;
-  const [quantity, setQuantity] = useState(1);
-  const { addToCart } = useCart();
+  
+  const { cartItems,addToCart, updateCart } = useCartContext();
+  const existingCartItem = cartItems.find((item) => item.id === product.id);
+  const [quantity, setQuantity] = useState(existingCartItem ? existingCartItem.quantity : 1);
 
   return (
         <div className="product-page">
@@ -27,15 +29,18 @@ const ProductDetail = () => {
                     <h2>${product.price}</h2>
                     <p>⭐ {product.rating}</p>
                     <p>{product.availabilityStatus}</p>
-                    <div className="quantity">
+                    <div className="quantity-buttons">
                         <button onClick={()=> setQuantity(Math.max(1,quantity-1))}>-</button>
                         <span>{quantity}</span>
                         <button onClick={()=> setQuantity(Math.min(10,quantity+1))}>+</button>
                     </div>
-
+                     {existingCartItem ? 
+                    <button className="cart-button" onClick={()=>updateCart(product,quantity)}>
+                        Update Cart
+                    </button> :
                     <button className="cart-button" onClick={()=>addToCart(product,quantity)}>
                         Add to Cart
-                    </button>
+                    </button> }
 
                     <p>🚚 {product.shippingInformation}</p>
                     <p>↩️ {product.returnPolicy}</p>
