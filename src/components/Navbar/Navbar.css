@@ -1,0 +1,20 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    border-bottom: 1px solid #ddd;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.navbar a {
+    color: #222;
+    text-decoration: none;
+}
+
+.cart-link {
+    margin-left: auto;
+}

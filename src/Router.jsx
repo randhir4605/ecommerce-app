@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home";
-import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
-import Products from "./pages/Products";
-import ProductDetails from "./pages/ProductDetail";
+import Cart from "./components/Cart/Cart";
+import Checkout from "./components/Checkout/Checkout";
+import Products from "./components/Products/Products";
+import ProductDetails from "./components/ProductDetail/ProductDetail";
 
 const router = createBrowserRouter([
     {

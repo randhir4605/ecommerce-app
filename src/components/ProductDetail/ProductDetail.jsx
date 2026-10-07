@@ -1,4 +1,4 @@
-import "../styles/ProductDetail.css";
+import "./ProductDetail.css";
 import { useLocation } from "react-router-dom";
 
 const ProductDetail = () => {
