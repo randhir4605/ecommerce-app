@@ -32,7 +32,7 @@ function Cart() {
                             
                         </div>
                         <strong> ${(item.price * item.quantity).toFixed(2)} </strong>
-                        <button onClick={() => removeFromCart(item.id)} > Remove </button>
+                        <button onClick={() => removeFromCart(item)} > Remove </button>
                     </div>
                 ))}
             </div>
