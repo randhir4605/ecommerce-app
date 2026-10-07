@@ -1,5 +1,5 @@
 const Home = () => {
-  return <h3>Home</h3>;
+  return <h4>This is a learning app created in react js</h4>;
 };
 
 export default Home;

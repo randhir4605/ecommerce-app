@@ -1,0 +1,24 @@
+.product-card {
+    width: 250px;
+}
+
+.product-images {
+    display: flex;
+    gap: 8px;
+
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+
+    border-radius: 10px;
+}
+
+.product-images img {
+    width: 250px;
+    height: 250px;
+
+    flex-shrink: 0;
+    object-fit: cover;
+
+    scroll-snap-align: start;
+    border-radius: 10px;
+}
