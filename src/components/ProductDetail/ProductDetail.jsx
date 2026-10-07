@@ -1,9 +1,13 @@
 import "./ProductDetail.css";
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useCart } from "../Cart/CartContext";
 
 const ProductDetail = () => {
   const location = useLocation();
   const product = location.state?.product;
+  const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
 
   return (
         <div className="product-page">
@@ -39,12 +43,12 @@ const ProductDetail = () => {
                     </p>
 
                     <div className="quantity">
-                        <button>-</button>
-                        <span>1</span>
-                        <button>+</button>
+                        <button onClick={()=> setQuantity(Math.max(1,quantity-1))}>-</button>
+                        <span>{quantity}</span>
+                        <button onClick={()=> setQuantity(Math.min(10,quantity+1))}>+</button>
                     </div>
 
-                    <button className="cart-button">
+                    <button className="cart-button" onClick={()=>addToCart(product,quantity)}>
                         Add to Cart
                     </button>
 
