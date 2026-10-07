@@ -3,6 +3,14 @@
     align-items: center;
     padding: 15px 30px;
     border-bottom: 1px solid #ddd;
+    
+}
+
+.brand2{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .nav-links {
@@ -17,4 +25,6 @@
 
 .cart-link {
     margin-left: auto;
+    margin-right: 20px;
+    position: relative;
 }

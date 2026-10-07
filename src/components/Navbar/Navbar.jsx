@@ -4,9 +4,12 @@ import { useCart } from "../Cart/CartContext";
 
 export default function Navbar() {
     const { cartItems } = useCart();
-	const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+    const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
     return (
         <nav className="navbar">
+            <div className="brand brand2">
+                <Link to="/">C-Store</Link>
+            </div>
             <div className="nav-links">
                 <Link to="/">Home</Link>
                 <Link to="/products">Products</Link>
@@ -28,7 +31,7 @@ export default function Navbar() {
                     <circle cx="20" cy="21" r="1" />
                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
                 </svg>
-				{cartItemCount > 0 && <span className="cart-count">{cartItemCount}</span>}
+                {cartItemCount > 0 && <span className="cart-count">{cartItemCount}</span>}
             </Link>
         </nav>
     );

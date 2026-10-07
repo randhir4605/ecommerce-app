@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getProducts } from "../../api/products";
 import ProductCard from "../ProductCard/ProductCard";
+import "./Products.css";
 
 function Products(){
     const [products, setProducts] = useState([]);
@@ -11,19 +12,14 @@ function Products(){
         });
     },[]);
     return (
-        <div style={style}>
-            {products.map((item) => (
-                <ProductCard key={item.id} product={item} />
-            ))}
+        <div className="products-container">
+            <div className="products-grid">
+                {products.map((item) => (
+                    <ProductCard key={item.id} product={item} />
+                ))}
+            </div>
         </div>
     );
 }
-
-const style = {
-    display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
-    gap: "20px",
-    padding: "20px"
-};
 
 export default Products;
