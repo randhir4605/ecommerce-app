@@ -35,4 +35,21 @@ public class BackendApplication {
 	public ResponseEntity<List<DummyUser>> dbTest(){
 		return new ResponseEntity<>(dummyUserRepository.findAll(),HttpStatus.OK);
 	}
+
+	@GetMapping("/api/auth/me")
+	public ResponseEntity<?> currentUser(
+			org.springframework.security.core.Authentication authentication) {
+
+		if (authentication == null) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		}
+
+		return ResponseEntity.ok(
+			java.util.Map.of(
+				"authenticated", authentication.isAuthenticated(),
+				"name", authentication.getName(),
+				"authorities", authentication.getAuthorities()
+			)
+		);
+	}
 }
