@@ -1,5 +1,8 @@
 package com.example.backend;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
@@ -7,11 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
-import java.util.List;
 
-import com.example.backend.repository.DummyUserRepository;
 import com.example.backend.entity.DummyUser;
+import com.example.backend.repository.DummyUserRepository;
 
 @SpringBootApplication
 @RestController
@@ -27,11 +28,11 @@ public class BackendApplication {
 
 	@GetMapping("/")
 	public ResponseEntity<String> hello(){
-		return new ResponseEntity<String>("Hello from backend",HttpStatus.OK);
+		return new ResponseEntity<>("Hello from backend",HttpStatus.OK);
 	}
 
 	@GetMapping("/db_test")
 	public ResponseEntity<List<DummyUser>> dbTest(){
-		return new ResponseEntity<List<DummyUser>>(dummyUserRepository.findAll(),HttpStatus.OK);
+		return new ResponseEntity<>(dummyUserRepository.findAll(),HttpStatus.OK);
 	}
 }
