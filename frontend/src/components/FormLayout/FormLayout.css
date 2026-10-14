@@ -1,0 +1,41 @@
+.form-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+}
+
+.form-layout {
+    width: 100%;
+    max-width: 28rem;
+}
+
+.form-fieldset {
+    border: 1px solid #cbd5e1;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    min-width: 0;
+}
+
+.form-fieldset legend {
+    padding: 0 0.5rem;
+    font-size: 1.25rem;
+}
+
+.form-fieldset label {
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.form-fieldset input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.65rem;
+    margin-bottom: 1rem;
+}
+/*
+There is seperate button component. Styling button here will conflict and hard to find the issue
+.form-fieldset button {
+    width: 100%;
+}
+    */

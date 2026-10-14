@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import './ProductCard.css';
-import { useCartContext } from "../Cart/CartContext";
+import { useCartContext } from "../../context/CartContext";
+import Button from "../Button/Button";
 
 function ProductCard({ product }) {
     const carouselId = `productCarousel-${product.id}`;
@@ -10,17 +11,10 @@ function ProductCard({ product }) {
         <div className="product-card">
             
             {/* Product Images */}
-            <div
-                id={carouselId}
-                className="carousel slide"
-                data-bs-touch="true"
-            >
+            <div id={carouselId} className="carousel slide" data-bs-touch="true" >
                 <div className="carousel-inner">
                     {product.images?.map((url, index) => (
-                        <div
-                            className={`carousel-item ${index === 0 ? "active" : ""}`}
-                            key={url}
-                        >
+                        <div className={`carousel-item ${index === 0 ? "active" : ""}`} key={url}>
                             <Link to={`/product/${product.id}`} state={{ product }} >
                                 <img src={url} alt={`${product.title} ${index + 1}`} className="product-image" />
                             </Link>
@@ -62,7 +56,7 @@ function ProductCard({ product }) {
                 </Link>
 
                 <div className="price-and-action" >
-                    <div className="product-card-price"> ${product.price.toFixed(2)} </div>
+                    <div> ${product.price.toFixed(2)} </div>
                     {existingCartItem ?(
                     
                         <div className="cart-controls">
@@ -71,13 +65,11 @@ function ProductCard({ product }) {
                             <span>{existingCartItem.quantity}</span>
                             <button onClick={()=>{updateCart(product, Math.min(10,existingCartItem.quantity + 1))}}>+</button>
                         </div>
-                        <button className="cart-action remove-action" onClick={() => removeFromCart(product, 0)}>Remove</button>
+                        <Button variant="secondary" onClick={() => removeFromCart(product, 0)}>Remove</Button>
                     </div>
                     ):(
                     
-                        <button className="cart-action add-action" onClick={()=>{
-                            addToCart(product,1);
-                        }}>Add To Cart </button>
+                        <Button onClick={()=>{addToCart(product,1)}}>Add To Cart </Button>
                     
                     )}
                 </div>

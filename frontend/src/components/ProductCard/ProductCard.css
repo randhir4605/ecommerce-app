@@ -10,16 +10,47 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.product-card:hover {
-  transform: translateY(-4px);
-}
-
 .product-image {
   display: block;
   width: 100%;
   height: 220px;
   object-fit: cover;
 }
+
+.product-card-body {
+  padding: 1rem;
+}
+
+.product-card-details {
+  flex-grow: 1;
+  color: #212529;
+  text-decoration: none;
+}
+.product-card-title {
+  overflow: hidden;
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.price-and-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* Quantity + Remove */
+.cart-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Carousel */
 
 .carousel {
   position: relative;
@@ -119,78 +150,8 @@
   right: 0;
 }
 
-.product-card-details {
-  flex-grow: 1;
-  color: #212529;
-  text-decoration: none;
+/*
+.product-card:hover {
+  transform: translateY(-4px);
 }
-
-.product-card-body {
-  padding: 1rem;
-}
-
-.product-card-title {
-  overflow: hidden;
-  margin: 0 0 0.5rem;
-  font-size: 1rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.price-and-action {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 16px;
-}
-
-.product-card-price {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #2563eb;
-  white-space: nowrap;
-}
-
-/* Quantity + Remove */
-.cart-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Common cart button */
-.cart-action {
-  min-width: 7rem;
-  padding: 0.5rem 0.8rem;
-  border: none;
-  border-radius: 0.5rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 0.85rem;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-/* Add button */
-.add-action {
-  background: #2563eb;
-  color: white;
-}
-
-.add-action:hover {
-  background: #1d4ed8;
-  transform: translateY(-1px);
-}
-
-/* Remove button */
-.remove-action {
-  background: #fee2e2;
-  color: #dc2626;
-}
-
-.remove-action:hover {
-  background: #fecaca;
-}
+*/

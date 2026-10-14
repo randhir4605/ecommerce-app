@@ -1,10 +1,31 @@
 import {createContext, useContext, useState} from "react";
+import { useAuthContext } from "./AuthContext";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const CartContext = createContext();
 
 export function CartProvider({children}){
     const [cartItems, setCartItems] = useState([]);
+    const {user} = useAuthContext();
+    const navigate = useNavigate();
+    const location = useLocation();
+
     function addToCart(product,quantity){
+        // Login is required to add item in the cart
+        if(!user){
+            navigate("/login",{
+                //state: {from: location}
+                state: {
+                    from: location.pathname,
+                    pendingCartItem: { product, quantity }
+                }
+            });
+            return;
+        }
+        addProductToCart(product,quantity);
+    }
+
+    function addProductToCart(product,quantity){
         setCartItems((currentItems)=>{
             const existingItem = currentItems.find((item)=>item.id === product.id);
             if(existingItem){
@@ -16,6 +37,7 @@ export function CartProvider({children}){
             }
         });
     }
+
     function updateCart(product,quantity){
         setCartItems((currentItems)=>{
             const existingItem = currentItems.find((item)=>item.id === product.id);
@@ -35,8 +57,13 @@ export function CartProvider({children}){
     function removeFromCart(product){
         setCartItems((currentItems)=>currentItems.filter((item)=>item.id !== product.id));
     }
+
+    function clearCart(){
+        setCartItems([]);
+    }
+
     return (
-        <CartContext.Provider value={{cartItems, addToCart, updateCart, removeFromCart}}>
+        <CartContext.Provider value={{cartItems, addToCart, addProductToCart, updateCart, removeFromCart, clearCart}}>
             {children}
         </CartContext.Provider>
     );

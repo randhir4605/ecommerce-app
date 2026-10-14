@@ -1,18 +1,26 @@
-import { useCartContext } from "./CartContext";
+import { Link, useLocation, Navigate } from "react-router-dom";
 import "./Cart.css";
-import { Link } from "react-router-dom";
+import { useCartContext } from "../../context/CartContext";
+import { useAuthContext } from "../../context/AuthContext";
+import Button from "../Button/Button";
 
 function Cart() {
     const { cartItems, updateCart, removeFromCart } = useCartContext();
+    const { user } = useAuthContext();
+    const location = useLocation();
     const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
+    
+    if(!user){
+        return <Navigate to="/login" state={{from:location}} replace />
+    }
     if (cartItems.length === 0) {
         return <h2 className="empty-cart">Your cart is empty</h2>;
     }
 
     return (
         <div className="cart">
-            <h1>Shopping Cart</h1>
+            <h2>Shopping Cart</h2>
 
             <div className="cart-items">
                 {cartItems.map((item) => (
@@ -32,14 +40,14 @@ function Cart() {
                             
                         </div>
                         <strong> ${(item.price * item.quantity).toFixed(2)} </strong>
-                        <button onClick={() => removeFromCart(item)} > Remove </button>
+                        <Button variant="secondary" onClick={() => removeFromCart(item)} > Remove </Button>
                     </div>
                 ))}
             </div>
 
             <div className="cart-total">
                 <h2>Total: ${total.toFixed(2)}</h2>
-                <button>Checkout</button>
+                <Button size="medium">Checkout</Button>
             </div>
         </div>
     );

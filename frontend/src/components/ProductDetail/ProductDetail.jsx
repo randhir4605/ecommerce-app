@@ -1,7 +1,7 @@
 import "./ProductDetail.css";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-import { useCartContext } from "../Cart/CartContext";
+import { useCartContext } from "../../context/CartContext";
 
 const ProductDetail = () => {
   const location = useLocation();
