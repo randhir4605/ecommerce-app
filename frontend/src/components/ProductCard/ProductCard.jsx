@@ -55,22 +55,20 @@ function ProductCard({ product }) {
                     <h5 className="product-card-title"> {product.title} </h5>
                 </Link>
 
-                <div className="price-and-action" >
-                    <div> ${product.price.toFixed(2)} </div>
-                    {existingCartItem ?(
-                    
-                        <div className="cart-controls">
-                        <div className="quantity-buttons">
-                            <button onClick={()=>{updateCart(product, Math.max(1,existingCartItem.quantity - 1))}}>-</button>
-                            <span>{existingCartItem.quantity}</span>
-                            <button onClick={()=>{updateCart(product, Math.min(10,existingCartItem.quantity + 1))}}>+</button>
-                        </div>
-                        <Button variant="secondary" onClick={() => removeFromCart(product, 0)}>Remove</Button>
-                    </div>
-                    ):(
-                    
-                        <Button onClick={()=>{addToCart(product,1)}}>Add To Cart </Button>
-                    
+                <div className={`price-and-action ${existingCartItem ? "in-cart" : "not-in-cart"}`}>
+                    <div className="product-price">${product.price.toFixed(2)}</div>
+
+                    {existingCartItem ? (
+                        <>
+                            <div className="quantity-buttons">
+                                <button type="button" onClick={() => updateCart(product, Math.max(1, existingCartItem.quantity - 1))}>-</button>
+                                <span>{existingCartItem.quantity}</span>
+                                <button type="button" onClick={() => updateCart(product, Math.min(10, existingCartItem.quantity + 1))}>+</button>
+                            </div>
+                            <Button variant="secondary" className="remove-button" onClick={() => removeFromCart(product, 0)}>Remove</Button>
+                        </>
+                    ) : (
+                        <Button onClick={() => addToCart(product, 1)}>Add To Cart</Button>
                     )}
                 </div>
             </div>

@@ -3,21 +3,23 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(0.15rem, 0.7vw, 0.7rem);
+    gap: clamp(0.2rem, 0.5vw, 0.5rem);
 
-    padding-block: clamp(0.2rem, 0.8vw, 0.8rem);
-    padding-inline: clamp(0.35rem, 1.5vw, 1.5rem);
+    padding-block: clamp(0.3rem, 0.6vw, 0.6rem);
+    padding-inline: clamp(0.5rem, 1.2vw, 1.1rem);
     margin: clamp(0.1rem, 0.4vw, 0.4rem);
 
-    font-size: clamp(0.65rem, 1.1vw, 1.1rem);
+    font-size: clamp(0.75rem, calc(0.7rem + 0.25vw), 1rem);
     line-height: 1.3;
 
     border: 0;
-    border-radius: clamp(0.2rem, 0.5vw, 0.5rem);
+    border-radius: clamp(0.2rem, 0.4vw, 0.4rem);
     cursor: pointer;
 
     max-width: 100%;
     min-width: 0;
+    min-height: 2.25rem;
+    box-sizing: border-box;
     transition: background-color 0.2s ease;
 }
 

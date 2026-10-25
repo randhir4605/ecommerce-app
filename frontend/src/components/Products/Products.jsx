@@ -1,18 +1,15 @@
 import { useState, useEffect } from "react";
-import { getProducts } from "../../api/products";
 import ProductCard from "../ProductCard/ProductCard";
 import "./Products.css";
+import { useLoaderData } from "react-router-dom";
 
 function Products(){
-    const [products, setProducts] = useState([]);
+    const {products, categoryName} = useLoaderData();
+    const title = categoryName ? categoryName : "All Products";
 
-    useEffect(()=>{
-        getProducts().then((data)=>{
-            setProducts(data.products);
-        });
-    },[]);
     return (
         <div className="products-container">
+            <h2>{title}</h2>
             <div className="products-grid">
                 {products.map((item) => (
                     <ProductCard key={item.id} product={item} />

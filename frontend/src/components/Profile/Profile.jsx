@@ -36,6 +36,10 @@ export default function Profile(){
 
     // Support your current API response structure.
     const profile = user.userAccount ?? user;
+
+    //TODO: keep response simple and seperate for user detail not same as logged in details
+    //  and align with dummyjson.com , fetch the user data on profile page seperatly
+
     return (
         <main id="profile-readonly" className="profile-readonly">
             <section>

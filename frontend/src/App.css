@@ -1,36 +1,25 @@
-body{
-    font-family:  Arial, sans-serif;
+body {
+	  font-family: Arial, sans-serif;
+	  padding-inline: clamp(1rem, 5vw, 5rem);
+      padding-top: 1rem;
 }
 
-/* Quantity buttons */
-.quantity-buttons {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  max-width: 7rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  background: white;
+/* to keep the footer at bootom of the page. */
+html,
+body,
+#root {
+    min-height: 100%;
+    margin: 0;
 }
 
-.quantity-buttons button {
-  width: 2.5rem;
-  height: 2rem;
-  border: none;
-  background: #f8fafc;
-  color: #334155;
-  font-size: 1.1rem;
-  cursor: pointer;
+.app-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
 }
 
-.quantity-buttons span {
-  min-width: 2rem;
-  text-align: center;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.quantity-buttons button:hover {
-  background: #e2e8f0;
+.app-main {
+    flex: 1; /* It makes the main content area take up the available vertical space when content is short, but allows it to grow when content is tall. Don't use position: fixed on the footer. That would make it overlap content while scrolling, which is not what you want.*/
+    min-width: 0;
 }

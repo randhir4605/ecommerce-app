@@ -4,16 +4,15 @@ import { Outlet } from "react-router-dom";
 import './App.css'
 
 function App() {
-  return (
-    
-    <div>
-      
-      <Navbar></Navbar>
-        <Outlet/>
-      <Footer></Footer>
-  
-    </div>
-  );
+    return (
+        <div className="app-layout">
+            <Navbar />
+            <main className="app-main">
+                <Outlet />
+            </main>
+            <Footer />
+        </div>
+    );
 }
 
 export default App;

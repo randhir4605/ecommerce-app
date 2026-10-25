@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="64" viewBox="0 0 240 64" role="img" aria-label="C-Store logo">
+  <g fill="none" stroke="#1769FF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7 12h8l6 27a4 4 0 0 0 4 3h24a4 4 0 0 0 4-3l5-19H18"/>
+    <path d="M23 27h28M25 34h24"/><circle cx="28" cy="51" r="3.5"/><circle cx="47" cy="51" r="3.5"/>
+  </g>
+  <text x="69" y="42" font-family="Inter, Arial, sans-serif" font-size="31" font-weight="750" fill="#102A56">C-Store</text>
+</svg>
