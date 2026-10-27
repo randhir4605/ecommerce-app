@@ -48,7 +48,7 @@ public class SecurityConfig {
             .securityContext(ctx -> ctx.securityContextRepository(securityContextRepository))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/","/api/public/**").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
             )
             .exceptionHandling(ex -> ex
                 .authenticationEntryPoint((request, response, exception) ->

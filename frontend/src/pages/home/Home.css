@@ -73,8 +73,9 @@
     scrollbar-width: none;
 }
 
-.category-grid > link{
+.category-grid > a{
     text-decoration: none;
+    color:inherit;
 }
 
 .category-grid::-webkit-scrollbar {

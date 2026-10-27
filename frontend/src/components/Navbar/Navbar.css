@@ -5,6 +5,7 @@
     grid-template-areas: "brand links search actions";
     align-items: center;
     gap: 1rem;
+    padding-top: 1rem;
 }
 .brand {
     grid-area: brand;

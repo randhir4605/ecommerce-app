@@ -32,7 +32,7 @@ export default function Navbar() {
     return (
         <nav className="navbar">
             <Link to="/" className="brand"><img src="/icons/c-store-logo.svg"/></Link>
-            <div className="nav-links"><Link to="/">Home</Link><Link to="/products">Products</Link></div>
+            <div className="nav-links"></div>
             
             <form className="nav-search" role="search" onSubmit={handleSearch}>
                 <input

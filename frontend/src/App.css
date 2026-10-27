@@ -1,7 +1,6 @@
 body {
 	  font-family: Arial, sans-serif;
 	  padding-inline: clamp(1rem, 5vw, 5rem);
-      padding-top: 1rem;
 }
 
 /* to keep the footer at bootom of the page. */
