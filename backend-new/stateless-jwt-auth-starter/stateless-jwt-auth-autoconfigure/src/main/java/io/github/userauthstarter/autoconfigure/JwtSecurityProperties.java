@@ -22,13 +22,15 @@ public class JwtSecurityProperties {
 
     /** Lifetime of tokens created by the built-in login endpoint. */
     private Duration accessTokenTtl = Duration.ofMinutes(15);
+    private Duration refreshTokenTtl = Duration.ofDays(30);
 
     /** Enable the starter's POST login endpoint when a UserDetailsService is present. */
     private boolean loginEndpointEnabled = true;
 
     /** Full path for the optional login endpoint. */
     private String loginPath = "/api/auth/login";
-
+    private String refreshPath = "/api/auth/refresh";
+    private String logoutPath = "/api/auth/logout";
     /** Routes that do not require a bearer token, in addition to the login path. */
     private List<String> publicPaths = new ArrayList<>(List.of("/api/public/**"));
 
@@ -56,7 +58,15 @@ public class JwtSecurityProperties {
         this.accessTokenTtl = accessTokenTtl;
     }
 
-    public boolean isLoginEndpointEnabled() {
+    public Duration getRefreshTokenTtl() {
+		return refreshTokenTtl;
+	}
+
+	public void setRefreshTokenTtl(Duration refreshTokenTtl) {
+		this.refreshTokenTtl = refreshTokenTtl;
+	}
+
+	public boolean isLoginEndpointEnabled() {
         return loginEndpointEnabled;
     }
 
@@ -72,11 +82,27 @@ public class JwtSecurityProperties {
         this.loginPath = loginPath;
     }
 
-    public List<String> getPublicPaths() {
+    public String getRefreshPath() {
+		return refreshPath;
+	}
+
+	public void setRefreshPath(String refreshPath) {
+		this.refreshPath = refreshPath;
+	}
+
+	public List<String> getPublicPaths() {
         return publicPaths;
     }
 
-    public void setPublicPaths(List<String> publicPaths) {
+    public String getLogoutPath() {
+		return logoutPath;
+	}
+
+	public void setLogoutPath(String logoutPath) {
+		this.logoutPath = logoutPath;
+	}
+
+	public void setPublicPaths(List<String> publicPaths) {
         this.publicPaths = publicPaths == null
                 ? new ArrayList<>()
                 : new ArrayList<>(publicPaths);

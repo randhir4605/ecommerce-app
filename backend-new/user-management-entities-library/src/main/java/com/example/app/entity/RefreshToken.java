@@ -30,6 +30,12 @@ public class RefreshToken {
     protected void onCreate() {
         if (createdAt == null) createdAt = OffsetDateTime.now(ZoneOffset.UTC);
     }
+    public RefreshToken(User user, String tokenHash, OffsetDateTime expiresAt) {
+        this.user = user;
+        this.tokenHash = tokenHash;
+        this.expiresAt = expiresAt;
+    }
+    
     public Long getId() { return id; }
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }

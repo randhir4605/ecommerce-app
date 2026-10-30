@@ -18,17 +18,18 @@ spring:
         format_sql: true
   web:
     error:
-      include-message: always		
+      include-message: always				
+
 app:
   jwt:
     enabled: true
     secret-base64: OKQj46AcIaQ0849RdtFkClwuKgxphvHHq5pEZVZkfnQ=
     issuer: c-store
     access-token-ttl: 15m
-
+    refresh-token-ttl: 30d
     login-endpoint-enabled: true
     login-path: /api/auth/login
-
+    refresh-path: /api/auth/refresh
+    logout-path: /api/auth/logout
     public-paths:
       - /api/public/**
-      - /api/auth/login

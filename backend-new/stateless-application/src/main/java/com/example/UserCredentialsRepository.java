@@ -12,4 +12,5 @@ public interface UserCredentialsRepository
 
     @EntityGraph(attributePaths = {"user","user.userRoles.role"})
     Optional<UserCredentials> findByUsernameIgnoreCase(String username);
+    Optional<UserCredentials> findByUser_Id(Long userId);
 }

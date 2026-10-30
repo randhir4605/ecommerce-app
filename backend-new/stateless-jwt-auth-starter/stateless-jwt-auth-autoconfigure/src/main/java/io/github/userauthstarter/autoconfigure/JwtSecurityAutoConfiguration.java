@@ -11,8 +11,8 @@ import java.util.Set;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import io.github.userauthstarter.token.JwtTokenService;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -20,24 +20,29 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.oauth2.jwt.JwtValidators;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.core.convert.converter.Converter;
+
+import io.github.userauthstarter.token.JwtTokenService;
+import io.github.userauthstarter.web.JwtAuthenticationController;
 
 @AutoConfiguration(beforeName = {
         "org.springframework.boot.security.oauth2.server.resource.autoconfigure.OAuth2ResourceServerAutoConfiguration",
@@ -110,12 +115,18 @@ public class JwtSecurityAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean(JwtTokenService.class)
-    JwtTokenService jwtTokenService(
-            JwtEncoder jwtEncoder,
-            JwtSecurityProperties properties,
-            Clock clock) {
-        return new JwtTokenService(jwtEncoder, properties, clock);
+    @ConditionalOnBean(UserDetailsService.class)
+    @ConditionalOnMissingBean
+    JwtTokenService jwtTokenService(JwtEncoder jwtEncoder, JwtSecurityProperties properties, 
+    		RefreshTokenStore refreshTokenStore, UserDetailsService userDetailsService, Clock clock) {
+        return new JwtTokenService(jwtEncoder, properties, refreshTokenStore, userDetailsService, clock);
+    }
+    
+    @Bean
+    @ConditionalOnMissingBean(JwtAuthenticationController.class)
+    @ConditionalOnProperty(prefix = "app.jwt", name = "login-endpoint-enabled", havingValue = "true", matchIfMissing = true)
+    JwtAuthenticationController jwtAuthenticationController(AuthenticationManager manager, JwtTokenService tokenService) {
+        return new JwtAuthenticationController(manager, tokenService);
     }
 
     @Bean
@@ -168,18 +179,17 @@ public class JwtSecurityAutoConfiguration {
             .httpBasic(AbstractHttpConfigurer::disable)
             .logout(AbstractHttpConfigurer::disable)
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(authorize -> {
-            	List<String> allowedPaths = new ArrayList<>(properties.getPublicPaths());
-            	if (properties.isLoginEndpointEnabled()) {
-            		allowedPaths.add(properties.getLoginPath());
+            .authorizeHttpRequests(auth -> {
+                List<String> allowedPaths = new ArrayList<>(properties.getPublicPaths());
+
+                if (properties.isLoginEndpointEnabled()) {
+                    allowedPaths.add(properties.getLoginPath());
+                    allowedPaths.add(properties.getRefreshPath());
+                    allowedPaths.add(properties.getLogoutPath());
                 }
-            	authorize.requestMatchers(allowedPaths.toArray(new String[0])).permitAll();
-            	authorize.anyRequest().authenticated();
-            	
-//                if (!permittedPaths.isEmpty()) {
-//                    authorize.requestMatchers(permittedPaths.toArray(String[]::new)).permitAll();
-//                }
-//                authorize.anyRequest().authenticated();
+
+                auth.requestMatchers(allowedPaths.toArray(String[]::new)).permitAll();
+                auth.anyRequest().authenticated();
             })
             .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)));
 
