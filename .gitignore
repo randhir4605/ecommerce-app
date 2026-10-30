@@ -1,1 +1,29 @@
-.DS_Store
+
+# Keep Git configuration
+!/.gitignore
+!/.gitattributes
+
+# Keep Maven Wrapper
+!/.mvn/
+!/.mvn/**
+
+# Keep GitHub workflows (if present)
+!/.github/
+!/.github/**
+
+# Ignore all hidden directories
+**/.[!.]*/
+**/.??*/
+
+# Ignore Maven build directories
+**/target/
+
+# Ignore hidden files and folders in project root
+/.?*
+
+# Ignore all hidden files and folders inside this module
+backend/**/.*
+backend-new/**/.*
+backend-new/session-based-application/**/.*
+backend-new/stateless-application/**/.*
+backend-new/oauth2-based-application/**/.*

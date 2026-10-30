@@ -1,0 +1,2 @@
+io.github.userauthstarter.autoconfigure.JwtSecurityAutoConfiguration
+io.github.userauthstarter.autoconfigure.JwtLoginAutoConfiguration

@@ -22,6 +22,7 @@
 	<modules>
 		<module>session-based-application</module>
 		<module>oauth2-based-application</module>
+		<module>stateless-application</module>
 	</modules>
 
 </project>
