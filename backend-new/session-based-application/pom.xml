@@ -39,6 +39,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.example</groupId>
+			<artifactId>user-management-entities</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 
 		<!-- PostgreSQL driver -->
 		<dependency>
