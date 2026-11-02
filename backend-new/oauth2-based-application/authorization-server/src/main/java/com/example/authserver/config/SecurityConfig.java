@@ -1,4 +1,6 @@
 package com.example.authserver.config;
+import java.util.Set;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -8,8 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
-import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
+import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
@@ -38,10 +40,10 @@ public class SecurityConfig {
         });
 
         http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
-
+        MediaTypeRequestMatcher htmlMatcher = new MediaTypeRequestMatcher(MediaType.TEXT_HTML);
+        htmlMatcher.setIgnoredMediaTypes(Set.of(MediaType.ALL));
         http.exceptionHandling(exceptions -> exceptions.defaultAuthenticationEntryPointFor(
-                new LoginUrlAuthenticationEntryPoint("/login"),
-                new MediaTypeRequestMatcher(MediaType.TEXT_HTML)));
+                new LoginUrlAuthenticationEntryPoint("/login"),htmlMatcher));
 
         return http.build();
     }

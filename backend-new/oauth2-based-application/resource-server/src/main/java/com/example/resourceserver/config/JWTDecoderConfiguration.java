@@ -1,0 +1,42 @@
+package com.example.resourceserver.config;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
+import org.springframework.security.oauth2.core.OAuth2Error;
+import org.springframework.security.oauth2.core.OAuth2ErrorCodes;
+import org.springframework.security.oauth2.core.OAuth2TokenValidator;
+import org.springframework.security.oauth2.core.OAuth2TokenValidatorResult;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtValidators;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+
+@Configuration
+public class JWTDecoderConfiguration {
+
+	@Bean
+	JwtDecoder jwtDecoder(
+	        @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}") String issuer,
+	        @Value("${spring.security.oauth2.resourceserver.jwt.audiences}") String expectedAudience) {
+
+	    NimbusJwtDecoder decoder = NimbusJwtDecoder.withIssuerLocation(issuer).build();
+
+	    OAuth2TokenValidator<Jwt> issuerValidator =
+	            JwtValidators.createDefaultWithIssuer(issuer);
+
+	    OAuth2TokenValidator<Jwt> audienceValidator = jwt ->
+	            jwt.getAudience().contains(expectedAudience)
+	                    ? OAuth2TokenValidatorResult.success()
+	                    : OAuth2TokenValidatorResult.failure(
+	                        new OAuth2Error(OAuth2ErrorCodes.INVALID_TOKEN,
+	                            "Invalid token audience", null));
+
+	    decoder.setJwtValidator(
+	            new DelegatingOAuth2TokenValidator<>(issuerValidator, audienceValidator));
+
+	    return decoder;
+	}
+	
+}
